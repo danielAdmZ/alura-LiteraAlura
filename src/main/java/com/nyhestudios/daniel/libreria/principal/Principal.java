@@ -37,7 +37,7 @@ public class Principal {
         String option = teclado.nextLine();
         switch (option) {
             case "1":
-                prueba();
+                buscarPorTitulo();
                 break;
             default:
                 break;
@@ -59,7 +59,7 @@ public class Principal {
         json = consumoAPI.obtenerDatos(URL_Base + id_libro+"/");
         DatosLibro libro = convierte.obtenerDatos(json, DatosLibro.class);
 
-
+        System.out.println(libro);
         Libro libro1 = new Libro(libro);
         System.out.println(libro1);
         //repositorio.save(libro1);

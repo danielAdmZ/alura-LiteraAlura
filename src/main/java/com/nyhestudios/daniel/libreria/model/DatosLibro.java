@@ -11,7 +11,7 @@ public record DatosLibro(
         @JsonAlias("id") Number id_WebLibro,
         @JsonAlias("title") String Title,
         @JsonAlias("authors") List<DataAutores> autores,
-        @JsonAlias("languages") List<DataLenguajes> languages,
+        @JsonAlias("languages") List<String> languages,
         @JsonAlias("media_type") String media_type
 ) {
 }
