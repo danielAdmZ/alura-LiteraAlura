@@ -1,6 +1,9 @@
 package com.nyhestudios.daniel.libreria.model;
 
+import com.nyhestudios.daniel.libreria.service.ConvierteDatos;
 import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
 @Table(name = "libros")
@@ -14,24 +17,41 @@ public class Libro {
     private String media_type;
     private String lenguaje_1;
     private String lenguaje_2;
-public Libro(){
 
-}
+    @ManyToOne(cascade = CascadeType.ALL)
+    private Autores autores;
+//
+
+
+
+    public Libro() {
+
+    }
 
     public Libro(DatosLibro datosLibro) {
+
         this.id_libro = datosLibro.id_WebLibro();
         this.title = datosLibro.Title();
         this.media_type = datosLibro.media_type();
+
         try {
             this.lenguaje_1 = datosLibro.languages().get(0);
-        }catch (RuntimeException e){
+        } catch (RuntimeException e) {
             this.lenguaje_1 = "Sin Lenguajes";
         }
         try {
             this.lenguaje_2 = datosLibro.languages().get(1);
-        }catch (RuntimeException e){
-            this.lenguaje_2 = datosLibro.languages().get(1);
+        } catch (RuntimeException e) {
+            this.lenguaje_2 = "Sin Lenguaje";
         }
+
+    }
+    public Autores getAutores() {
+        return autores;
+    }
+
+    public void setAutores(Autores autores) {
+        this.autores = autores;
     }
 
     public long getId() {
@@ -84,11 +104,12 @@ public Libro(){
 
     @Override
     public String toString() {
-        return "Libro{" +
+        return "------------\nLibro\n" +
                 "id_libro=" + id_libro +
-                ", title='" + title + '\'' +
-                ", media_type='" + media_type + '\'' +
-                '}';
+                "\nTitulo=" + title +
+                " \nmedia_type=" + media_type  +
+                "\nautor: "+ autores.getNombre() +
+                "\n--------------";
     }
 }
 

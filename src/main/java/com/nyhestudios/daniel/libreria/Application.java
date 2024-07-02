@@ -1,5 +1,6 @@
 package com.nyhestudios.daniel.libreria;
 
+import com.nyhestudios.daniel.libreria.model.repository.AutoresRepository;
 import com.nyhestudios.daniel.libreria.model.repository.SerieRepository;
 import com.nyhestudios.daniel.libreria.principal.Principal;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,13 +13,15 @@ public class Application implements CommandLineRunner {
 
 	@Autowired
 	private SerieRepository repository;
+	@Autowired
+	private AutoresRepository repositoryAutores;
 	public static void main(String[] args) {
 		SpringApplication.run(Application.class, args);
 	}
 
 	@Override
 	public void run(String... args) throws Exception {
-		Principal main = new Principal(repository);
+		Principal main = new Principal(repository, repositoryAutores);
 		main.menu();
 	}
 }
